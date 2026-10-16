@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Sabr</title>
+<meta name="description" content="Privacy policy for Sabr, an Android screen-time blocker. No account, no analytics, no advertising, no server.">
+<meta name="robots" content="index,follow">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5f6368;
+    --accent: #0b57d0;
+    --rule: #dadce0;
+    --surface: #f8f9fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212;
+      --fg: #e3e3e3;
+      --muted: #9aa0a6;
+      --accent: #8ab4f8;
+      --rule: #3c4043;
+      --surface: #1e1f20;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 0 20px 72px;
+  }
+  main { max-width: 760px; margin: 0 auto; }
+  header { padding: 56px 0 24px; border-bottom: 1px solid var(--rule); }
+  h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 8px; }
+  .lede { color: var(--muted); margin: 0; font-size: .95rem; }
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    margin: 48px 0 12px;
+    scroll-margin-top: 24px;
+  }
+  p, li { margin: 0 0 16px; }
+  ul { padding-left: 22px; }
+  a { color: var(--accent); }
+  a:focus-visible, :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 24px;
+    font-size: .95rem;
+    display: block;
+    overflow-x: auto;
+  }
+  th, td {
+    border: 1px solid var(--rule);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--surface); font-weight: 600; }
+  .summary {
+    background: var(--surface);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 18px 20px;
+    margin: 24px 0 8px;
+  }
+  .summary p { margin: 0; }
+  .contact {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-top: 8px;
+  }
+  .contact p { margin: 0; }
+  strong { font-weight: 600; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .9em;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Privacy Policy for Sabr</h1>
+    <p class="lede">Last updated: 15 October 2026</p>
+  </header>
+
+  <p>Sabr ("the app") is an Android screen-time blocker published by Fares Ahmed
+  ("we", "us"). This policy explains what the app accesses, what it does with it,
+  and what leaves your device.</p>
+
+  <div class="summary">
+    <p>The short version: <strong>Sabr has no account, no analytics, no
+    advertising, and no server of its own. Your app lists, your deed history,
+    and your settings stay on your phone and are never sent to us.</strong>
+    The one thing that leaves your device is ordinary DNS lookups, which must
+    reach a DNS resolver for the internet to work &mdash; and only for
+    websites you have <em>not</em> blocked.</p>
+  </div>
+
+  <h2 id="access">1. What Sabr accesses on your device</h2>
+  <table>
+    <thead>
+      <tr><th>Data</th><th>How it is accessed</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>App usage statistics</strong> &mdash; which app is in the
+            foreground and for how long</td>
+        <td>Android's Usage Access permission (<code>PACKAGE_USAGE_STATS</code>)</td>
+        <td>This is the core of the blocker: detecting when you open an app you
+            asked Sabr to guard, and enforcing daily time limits.</td>
+      </tr>
+      <tr>
+        <td><strong>Installed apps</strong> &mdash; the names and packages of
+            apps with a launcher icon</td>
+        <td>Android package manager</td>
+        <td>So you can choose which apps to restrict. Icons are read per app,
+            only to display them in that list.</td>
+      </tr>
+      <tr>
+        <td><strong>DNS lookups</strong> &mdash; the domain names your apps and
+            browser request</td>
+        <td>Android's <code>VpnService</code> API</td>
+        <td>To match requests against the blocklist and block them before they
+            connect.</td>
+      </tr>
+      <tr>
+        <td><strong>Your blocklists</strong> &mdash; chosen apps, chosen
+            websites, schedule and limit settings</td>
+        <td>Created by you, stored on device</td>
+        <td>To enforce your settings.</td>
+      </tr>
+      <tr>
+        <td><strong>Your activity in Sabr</strong> &mdash; deeds completed,
+            breaks earned, streaks</td>
+        <td>Created by you, stored on device</td>
+        <td>To show your progress and calculate streaks.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Sabr does <strong>not</strong> access your messages, contacts, photos,
+  files, calendar, microphone, camera, location, or the contents of your
+  network traffic. It cannot read the pages you visit, only the domain names
+  your device looks up.</p>
+
+  <h2 id="leaves">2. What leaves your device</h2>
+
+  <p><strong>Nothing is sent to us.</strong> Sabr has no backend, no account
+  system, and no telemetry. We never receive your app lists, your usage
+  history, your domains, or your deed history.</p>
+
+  <p>Two things do leave your device during normal operation:</p>
+
+  <p><strong>1. DNS lookups for websites you have not blocked.</strong> To load
+  a site, its domain must be resolved by a DNS resolver. Sabr intercepts
+  lookups so it can block the ones on your list, and forwards all
+  <em>other</em> lookups to a resolver &mdash; either the resolver configured
+  by your network (Wi-Fi/mobile), or a public resolver such as Cloudflare
+  (<code>1.1.1.1</code>) or Google (<code>8.8.8.8</code>) as a fallback. On
+  this path requests are sent unencrypted, so the resolver can see the domain
+  names being looked up. This is the same exposure as browsing without Sabr,
+  except the request passes through Sabr's local filter first.
+  <strong>Lookups for domains on your blocklist are never forwarded</strong>
+  &mdash; they are answered locally with a null address. Sabr does not
+  blackhole or intercept any traffic beyond DNS.</p>
+
+  <p><strong>2. Your in-app purchases, if any.</strong> Sabr is distributed
+  free and charges nothing. If that ever changes, payment processing would be
+  handled by Google Play, under Google's privacy policy, and this policy would
+  be updated before release.</p>
+
+  <h2 id="storage">3. What is stored, and where</h2>
+  <p>All of it is on your device:</p>
+  <ul>
+    <li><strong>App-level storage</strong> (Android <code>AsyncStorage</code>):
+        your blocked sites, blocked apps, deeds, break sessions, daily stats,
+        and settings.</li>
+    <li><strong>Service-level storage</strong> (Android
+        <code>SharedPreferences</code>): the same enforcement config, kept by
+        the blocking service so it can keep working after the app is closed or
+        the phone restarts.</li>
+    <li><strong>A cache directory</strong> for app icons, which Android may
+        reclaim at any time.</li>
+  </ul>
+  <p>None of this is backed up or synced &mdash; Sabr sets
+  <code>allowBackup=false</code>, so your data is not copied to Google's cloud
+  backup either.</p>
+
+  <h2 id="permissions">4. Permissions, and why each is needed</h2>
+  <ul>
+    <li><strong>Usage access</strong> &mdash; detect the foreground app and
+        enforce limits (the blocker).</li>
+    <li><strong>Display over other apps</strong> &mdash; show the pause screen
+        on top of a blocked app.</li>
+    <li><strong>VPN (VpnService)</strong> &mdash; run the local DNS filter. See
+        the disclosure Sabr shows in-app before this is switched on.</li>
+    <li><strong>Notifications</strong> &mdash; tell you when a break is ending,
+        and show the ongoing "Sabr is active" notification required for the
+        service.</li>
+    <li><strong>Run after restart</strong> &mdash; resume blocking after a
+        reboot.</li>
+    <li><strong>Alarms</strong> &mdash; schedule break-expiry and break-warning
+        notifications.</li>
+    <li><strong>Battery optimisation exemption (optional)</strong> &mdash; ask
+        you to exempt Sabr so aggressive battery managers don't stop the
+        blocker.</li>
+  </ul>
+
+  <h2 id="sharing">5. Sharing and disclosure</h2>
+  <p>We do not sell, rent, share, or transfer your data to anyone. There is no
+  ad network, no analytics provider, and no crash-reporting SDK in the app.
+  The only third party that sees anything as a result of using Sabr is the DNS
+  resolver described in section 2, because the DNS protocol requires a resolver
+  to answer a lookup at all.</p>
+  <p>We would only disclose data if legally compelled, and because we hold
+  none, we would have nothing to disclose.</p>
+
+  <h2 id="diagnostics">6. Diagnostics you choose to send</h2>
+  <p>Sabr's Settings &rarr; Diagnostics screen can show a technical snapshot
+  (device model, Android version, permission states, and whether the guard
+  service is running) and offers a <strong>Share</strong> button so you can
+  send it to us when reporting a problem. This only happens if you tap Share
+  and pick a destination yourself.</p>
+  <p>That snapshot deliberately excludes the raw record of which apps you
+  opened &mdash; package names are reduced to short non-reversible tags and
+  timestamps are stripped before anything is shareable. The same rule applies
+  to the system log: the app does not write the package name of the app you
+  opened, or the domain you attempted to visit, to logcat. Nothing is ever sent
+  automatically.</p>
+
+  <h2 id="children">7. Children</h2>
+  <p>Sabr is not directed at children under 13, and we do not knowingly collect
+  personal information from children. Because the app collects nothing on our
+  side, there is nothing for a child's data to be exposed to. Parents looking
+  for a family screen-time tool should be aware that Sabr is designed for an
+  individual managing their own device.</p>
+
+  <h2 id="control">8. Your control and deletion</h2>
+  <p>You are in control of everything Sabr stores:</p>
+  <ul>
+    <li><strong>Reset all data</strong> &mdash; Settings &rarr; Reset All Data
+        deletes your blocked apps, blocked sites, deeds, stats, settings, and
+        resets the native enforcement config.</li>
+    <li><strong>Clear the site list</strong> &mdash; turning website blocking
+        off removes the blocklist from the VPN and stops the tunnel.</li>
+    <li><strong>Uninstall</strong> &mdash; removing the app deletes all app
+        storage, the service preferences, and the icon cache.</li>
+  </ul>
+  <p>Since we hold no data about you, there is no server-side record to request
+  or delete.</p>
+
+  <h2 id="security">9. Security</h2>
+  <p>Data stays in your device's private app storage, which other apps cannot
+  read. Sabr's VPN service is declared with <code>BIND_VPN_SERVICE</code> and
+  is not exported, so other apps cannot drive it. Internal broadcast receivers
+  are not exported. The app disables Android cloud backup. Note the honest
+  caveat from section 2: the DNS forwarding path itself is unencrypted, which
+  is inherent to serving as a local DNS filter for sites you have not
+  blocked.</p>
+
+  <h2 id="changes">10. Changes to this policy</h2>
+  <p>If this policy changes materially, the "Last updated" date will change and
+  the new version will be published at this same address before the app is
+  updated. If Sabr ever adds a feature that sends data anywhere &mdash;
+  analytics, sync, crash reporting &mdash; this policy will be updated and the
+  change disclosed before that feature ships.</p>
+
+  <h2 id="contact">11. Contact</h2>
+  <div class="contact">
+    <p>Questions about this policy or about Sabr's data handling:<br>
+    <strong>Fares Ahmed</strong> &mdash;
+    <a href="mailto:eng.fares0ahmed@gmail.com">eng.fares0ahmed@gmail.com</a></p>
+  </div>
+</main>
+</body>
+</html>
