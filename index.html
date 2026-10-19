@@ -98,7 +98,7 @@
 <main>
   <header>
     <h1>Privacy Policy for Sabr</h1>
-    <p class="lede">Last updated: 15 October 2026</p>
+    <p class="lede">Last updated: 19 October 2026</p>
   </header>
 
   <p>Sabr ("the app") is an Android screen-time blocker published by Fares Ahmed
@@ -111,7 +111,9 @@
     and your settings stay on your phone and are never sent to us.</strong>
     The one thing that leaves your device is ordinary DNS lookups, which must
     reach a DNS resolver for the internet to work &mdash; and only for
-    websites you have <em>not</em> blocked.</p>
+    websites you have <em>not</em> blocked. If you turn on the optional
+    content filter, those lookups are answered by CleanBrowsing instead of
+    your network's resolver (section 2).</p>
   </div>
 
   <h2 id="access">1. What Sabr accesses on your device</h2>
@@ -157,9 +159,10 @@
   </table>
 
   <p>Sabr does <strong>not</strong> access your messages, contacts, photos,
-  files, calendar, microphone, camera, location, or the contents of your
-  network traffic. It cannot read the pages you visit, only the domain names
-  your device looks up.</p>
+  files, calendar, microphone, camera, or the contents of your network traffic.
+  It cannot read the pages you visit, only the domain names your device looks
+  up. The one exception is approximate location, and only if you turn on
+  prayer notifications &mdash; see below.</p>
 
   <h2 id="leaves">2. What leaves your device</h2>
 
@@ -182,7 +185,33 @@
   &mdash; they are answered locally with a null address. Sabr does not
   blackhole or intercept any traffic beyond DNS.</p>
 
-  <p><strong>2. Your in-app purchases, if any.</strong> Sabr is distributed
+  <p><strong>If you turn on the content filter in the Websites tab,</strong>
+  all <em>other</em> lookups are instead forwarded to CleanBrowsing
+  (<code>185.228.168.168</code> and <code>185.228.169.168</code>), a
+  third-party filtering resolver. CleanBrowsing sees the domain names of every
+  lookup your device makes while the filter is on and answers them filtered.
+  This is a different party from your network's own resolver, so it is a
+  stricter exposure than the default path above &mdash; it is not more data,
+  but it is data reaching a company rather than your network operator. The
+  filter is opt-in, cannot be switched off in the app, and is cleared only if
+  you erase all Sabr data or uninstall the app. Lookups for domains on your
+  blocklist are still never forwarded in either mode.</p>
+
+  <p><strong>2. Your approximate location, if you turn on prayer
+  notifications.</strong> Sabr needs to know roughly where you are to look up
+  prayer times. With your permission it reads the device's last known
+  <em>approximate</em> location (coarse, not GPS), rounds it to two decimal
+  places &mdash; about a kilometre &mdash; and sends those coordinates to
+  Aladhan (<code>api.aladhan.com</code>), a public prayer-time API, to fetch
+  the month's times. Aladhan sees the rounded coordinate, the month, and your
+  IP address, and nothing else: no identifier, no app list, no usage data.
+  The times are cached on your device, so the request is made about once a
+  month rather than on every launch. If you decline the permission, the app
+  falls back to a city you choose, and the same request is made with that
+  city's fixed coordinates. Prayer notifications are off by default; turning
+  them off stops both the request and the notifications.</p>
+
+  <p><strong>3. Your in-app purchases, if any.</strong> Sabr is distributed
   free and charges nothing. If that ever changes, payment processing would be
   handled by Google Play, under Google's privacy policy, and this policy would
   be updated before release.</p>
@@ -227,9 +256,13 @@
   <h2 id="sharing">5. Sharing and disclosure</h2>
   <p>We do not sell, rent, share, or transfer your data to anyone. There is no
   ad network, no analytics provider, and no crash-reporting SDK in the app.
-  The only third party that sees anything as a result of using Sabr is the DNS
-  resolver described in section 2, because the DNS protocol requires a resolver
-  to answer a lookup at all.</p>
+  The only third parties that see anything as a result of using Sabr are DNS
+  resolvers &mdash; your network's resolver or a public one by default, or
+  CleanBrowsing if you have turned on the content filter &mdash; because the
+  DNS protocol requires a resolver to answer a lookup at all, and Aladhan if
+  you have turned on prayer notifications, because the prayer times come from
+  its API. We neither own nor operate CleanBrowsing or Aladhan and have no
+  relationship with either.</p>
   <p>We would only disclose data if legally compelled, and because we hold
   none, we would have nothing to disclose.</p>
 
