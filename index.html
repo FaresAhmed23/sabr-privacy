@@ -98,7 +98,7 @@
 <main>
   <header>
     <h1>Privacy Policy for Sabr</h1>
-    <p class="lede">Last updated: 19 October 2026</p>
+    <p class="lede">Last updated: 22 October 2026</p>
   </header>
 
   <p>Sabr ("the app") is an Android screen-time blocker published by Fares Ahmed
@@ -109,10 +109,10 @@
     <p>The short version: <strong>Sabr has no account, no analytics, no
     advertising, and no server of its own. Your app lists, your deed history,
     and your settings stay on your phone and are never sent to us.</strong>
-    The one thing that leaves your device is ordinary DNS lookups, which must
-    reach a DNS resolver for the internet to work &mdash; and only for
-    websites you have <em>not</em> blocked. If you turn on the optional
-    content filter, those lookups are answered by CleanBrowsing instead of
+    The one thing that leaves your device is ordinary DNS traffic, which must
+    reach a DNS resolver for the internet to work. Sabr does not intercept it.
+    You can optionally point Android's Private DNS at a third-party family
+    filter yourself; if you do, that provider answers your lookups instead of
     your network's resolver (section 2).</p>
   </div>
 
@@ -137,15 +137,8 @@
             only to display them in that list.</td>
       </tr>
       <tr>
-        <td><strong>DNS lookups</strong> &mdash; the domain names your apps and
-            browser request</td>
-        <td>Android's <code>VpnService</code> API</td>
-        <td>To match requests against the blocklist and block them before they
-            connect.</td>
-      </tr>
-      <tr>
-        <td><strong>Your blocklists</strong> &mdash; chosen apps, chosen
-            websites, schedule and limit settings</td>
+        <td><strong>Your blocklists and settings</strong> &mdash; chosen apps,
+            schedule and limit settings</td>
         <td>Created by you, stored on device</td>
         <td>To enforce your settings.</td>
       </tr>
@@ -159,8 +152,8 @@
   </table>
 
   <p>Sabr does <strong>not</strong> access your messages, contacts, photos,
-  files, calendar, microphone, camera, or the contents of your network traffic.
-  It cannot read the pages you visit, only the domain names your device looks
+  files, calendar, microphone, camera, the contents of your network traffic, or
+  your DNS queries. It cannot read the pages you visit or the domains you look
   up. The one exception is approximate location, and only if you turn on
   prayer notifications &mdash; see below.</p>
 
@@ -172,30 +165,25 @@
 
   <p>Two things do leave your device during normal operation:</p>
 
-  <p><strong>1. DNS lookups for websites you have not blocked.</strong> To load
-  a site, its domain must be resolved by a DNS resolver. Sabr intercepts
-  lookups so it can block the ones on your list, and forwards all
-  <em>other</em> lookups to a resolver &mdash; either the resolver configured
-  by your network (Wi-Fi/mobile), or a public resolver such as Cloudflare
-  (<code>1.1.1.1</code>) or Google (<code>8.8.8.8</code>) as a fallback. On
-  this path requests are sent unencrypted, so the resolver can see the domain
-  names being looked up. This is the same exposure as browsing without Sabr,
-  except the request passes through Sabr's local filter first.
-  <strong>Lookups for domains on your blocklist are never forwarded</strong>
-  &mdash; they are answered locally with a null address. Sabr does not
-  blackhole or intercept any traffic beyond DNS.</p>
+  <p><strong>1. DNS lookups, handled by your own resolver.</strong> To load a
+  site, its domain must be resolved by a DNS resolver. Sabr does not run a VPN,
+  does not intercept DNS, and does not see those lookups. Your device sends
+  them straight to the resolver configured by your network (Wi-Fi/mobile).
+  That resolver can see the domain names being looked up, exactly as it would
+  without Sabr installed.</p>
 
-  <p><strong>If you turn on the content filter in the Websites tab,</strong>
-  all <em>other</em> lookups are instead forwarded to CleanBrowsing
-  (<code>185.228.168.168</code> and <code>185.228.169.168</code>), a
-  third-party filtering resolver. CleanBrowsing sees the domain names of every
-  lookup your device makes while the filter is on and answers them filtered.
-  This is a different party from your network's own resolver, so it is a
-  stricter exposure than the default path above &mdash; it is not more data,
-  but it is data reaching a company rather than your network operator. The
-  filter is opt-in, cannot be switched off in the app, and is cleared only if
-  you erase all Sabr data or uninstall the app. Lookups for domains on your
-  blocklist are still never forwarded in either mode.</p>
+  <p><strong>Optional Private DNS filter (Android 9 and later).</strong> Sabr's
+  Settings screen can open Android's Private DNS settings and shows
+  CleanBrowsing's free Family Filter hostname
+  (<code>family-filter-dns.cleanbrowsing.org</code>). This is entirely your
+  choice and happens in Android settings, not inside Sabr. If you enable it,
+  Android sends <em>all</em> DNS lookups on the device to CleanBrowsing, which
+  sees the domain names of every lookup and answers adult, malware, and
+  mixed-content domains with a block page. Sabr does not receive those
+  queries, cannot read them, and cannot switch the setting on or off for you.
+  You can change or remove the hostname in Android settings at any time.
+  Because this is a device-wide DNS setting, some apps that use their own
+  encrypted DNS or a VPN may bypass it.</p>
 
   <p><strong>2. Your approximate location, if you turn on prayer
   notifications.</strong> Sabr needs to know roughly where you are to look up
@@ -220,8 +208,8 @@
   <p>All of it is on your device:</p>
   <ul>
     <li><strong>App-level storage</strong> (Android <code>AsyncStorage</code>):
-        your blocked sites, blocked apps, deeds, break sessions, daily stats,
-        and settings.</li>
+        your blocked apps, deeds, break sessions, daily stats, cached prayer
+        times, and settings.</li>
     <li><strong>Service-level storage</strong> (Android
         <code>SharedPreferences</code>): the same enforcement config, kept by
         the blocking service so it can keep working after the app is closed or
@@ -239,8 +227,6 @@
         enforce limits (the blocker).</li>
     <li><strong>Display over other apps</strong> &mdash; show the pause screen
         on top of a blocked app.</li>
-    <li><strong>VPN (VpnService)</strong> &mdash; run the local DNS filter. See
-        the disclosure Sabr shows in-app before this is switched on.</li>
     <li><strong>Notifications</strong> &mdash; tell you when a break is ending,
         and show the ongoing "Sabr is active" notification required for the
         service.</li>
@@ -256,12 +242,12 @@
   <h2 id="sharing">5. Sharing and disclosure</h2>
   <p>We do not sell, rent, share, or transfer your data to anyone. There is no
   ad network, no analytics provider, and no crash-reporting SDK in the app.
-  The only third parties that see anything as a result of using Sabr are DNS
-  resolvers &mdash; your network's resolver or a public one by default, or
-  CleanBrowsing if you have turned on the content filter &mdash; because the
-  DNS protocol requires a resolver to answer a lookup at all, and Aladhan if
-  you have turned on prayer notifications, because the prayer times come from
-  its API. We neither own nor operate CleanBrowsing or Aladhan and have no
+  The only third parties that see anything as a result of using Sabr are your
+  DNS resolver &mdash; your network's resolver, or CleanBrowsing if you chose
+  to enable its Private DNS filter in Android settings &mdash; because the DNS
+  protocol requires a resolver to answer a lookup at all, and Aladhan if you
+  have turned on prayer notifications, because the prayer times come from its
+  API. We neither own nor operate CleanBrowsing or Aladhan and have no
   relationship with either.</p>
   <p>We would only disclose data if legally compelled, and because we hold
   none, we would have nothing to disclose.</p>
@@ -290,10 +276,11 @@
   <p>You are in control of everything Sabr stores:</p>
   <ul>
     <li><strong>Reset all data</strong> &mdash; Settings &rarr; Reset All Data
-        deletes your blocked apps, blocked sites, deeds, stats, settings, and
-        resets the native enforcement config.</li>
-    <li><strong>Clear the site list</strong> &mdash; turning website blocking
-        off removes the blocklist from the VPN and stops the tunnel.</li>
+        deletes your blocked apps, deeds, stats, settings, and resets the
+        native enforcement config.</li>
+    <li><strong>Private DNS filter</strong> &mdash; if you enabled one, change
+        or clear it in Android Settings &rarr; Network &amp; internet &rarr;
+        Private DNS. Sabr never controlled it.</li>
     <li><strong>Uninstall</strong> &mdash; removing the app deletes all app
         storage, the service preferences, and the icon cache.</li>
   </ul>
@@ -302,12 +289,11 @@
 
   <h2 id="security">9. Security</h2>
   <p>Data stays in your device's private app storage, which other apps cannot
-  read. Sabr's VPN service is declared with <code>BIND_VPN_SERVICE</code> and
-  is not exported, so other apps cannot drive it. Internal broadcast receivers
-  are not exported. The app disables Android cloud backup. Note the honest
-  caveat from section 2: the DNS forwarding path itself is unencrypted, which
-  is inherent to serving as a local DNS filter for sites you have not
-  blocked.</p>
+  read. Sabr declares no VPN service and does not intercept network traffic.
+  Internal broadcast receivers are not exported. The app disables Android
+  cloud backup. The optional Private DNS filter in section 2 is a system
+  setting outside Sabr's control; if you enable it, DNS queries are sent to
+  CleanBrowsing over Android's encrypted Private DNS (DNS-over-TLS).</p>
 
   <h2 id="changes">10. Changes to this policy</h2>
   <p>If this policy changes materially, the "Last updated" date will change and
